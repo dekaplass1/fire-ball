@@ -1,0 +1,12 @@
+[
+  { "level": 1,  "xpRequired": 0,    "xpToNext": 100,  "maxHp": 30,  "atk": 8,  "def": 4  },
+  { "level": 2,  "xpRequired": 100,  "xpToNext": 250,  "maxHp": 36,  "atk": 9,  "def": 5  },
+  { "level": 3,  "xpRequired": 250,  "xpToNext": 450,  "maxHp": 43,  "atk": 11, "def": 5  },
+  { "level": 4,  "xpRequired": 450,  "xpToNext": 700,  "maxHp": 51,  "atk": 12, "def": 6  },
+  { "level": 5,  "xpRequired": 700,  "xpToNext": 1000, "maxHp": 60,  "atk": 14, "def": 7  },
+  { "level": 6,  "xpRequired": 1000, "xpToNext": 1350, "maxHp": 70,  "atk": 16, "def": 8  },
+  { "level": 7,  "xpRequired": 1350, "xpToNext": 1750, "maxHp": 81,  "atk": 18, "def": 9  },
+  { "level": 8,  "xpRequired": 1750, "xpToNext": 2200, "maxHp": 93,  "atk": 20, "def": 10 },
+  { "level": 9,  "xpRequired": 2200, "xpToNext": 2700, "maxHp": 106, "atk": 22, "def": 11 },
+  { "level": 10, "xpRequired": 2700, "xpToNext": null, "maxHp": 120, "atk": 25, "def": 12 }
+]

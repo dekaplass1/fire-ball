@@ -1,0 +1,18 @@
+[
+  {
+    "id": "potion",
+    "name": "Potion",
+    "price": 30,
+    "effect": "heal",
+    "effectValue": 20,
+    "description": "Restaure 20 PV."
+  },
+  {
+    "id": "grande-potion",
+    "name": "Grande Potion",
+    "price": 80,
+    "effect": "heal",
+    "effectValue": 50,
+    "description": "Restaure 50 PV."
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "gobelin",
+    "name": "Gobelin",
+    "hp": 15,
+    "atk": 5,
+    "def": 2,
+    "xpReward": 15,
+    "gilsReward": 8,
+    "minLevel": 1
+  },
+  {
+    "id": "loup",
+    "name": "Loup",
+    "hp": 25,
+    "atk": 8,
+    "def": 3,
+    "xpReward": 30,
+    "gilsReward": 15,
+    "minLevel": 2
+  },
+  {
+    "id": "ogre",
+    "name": "Ogre",
+    "hp": 45,
+    "atk": 13,
+    "def": 6,
+    "xpReward": 60,
+    "gilsReward": 28,
+    "minLevel": 4
+  }
+]
