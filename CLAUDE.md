@@ -68,14 +68,14 @@ JRPG solo tour par tour, navigateur mobile (sans installation), cercle d'amis. S
 
 ## État d'implémentation
 
-**Epic 1 complet — Stories 1.1–1.7 : review** | **Prochaine : Story 2.1 (CombatEngine)**
+**Story 2.1 review** | **Prochaine : Story 2.2 (CombatScene)**
 
 | Epic | Stories | Statut |
 |---|---|---|
 | 1 — Lancement & map | 1.1–1.7 implémentées | ✅ review |
-| 2 — Combat | 2.1–2.4 à faire | ⏳ |
+| 2 — Combat | 2.1 review, 2.2–2.4 à faire | 🔄 |
 | 3 — Progression | 3.1–3.3 à faire | ⏳ |
 | 4 — Boutique | 4.1–4.2 à faire | ⏳ |
 | 5 — Persistance | 5.1–5.3 à faire | ⏳ |
 
-**Story 2.1 — CombatEngine :** Module JS pur (`src/systems/CombatEngine.js`), zéro import Phaser. Méthodes : `initCombat(mapLevel)` (sélection aléatoire ennemi), `resolveTurn(action)` → `{heroHp, enemyHp, log, outcome}`. Outcome : `null` / `'victory'` / `'defeat'` / `'fled'`.
+**Story 2.2 — CombatScene :** Vue combat perspective 3/4, héros gauche / ennemi droite. Appelle `CombatEngine.initCombat(mapLevel)` au démarrage. Boutons tactiles "Attaquer" / "Fuir" (min 44×44px). Affiche log, barres HP, met à jour UIScene via `this.game.events`. Transitions : victory/fled → MapScene, defeat → GameOverScene.
