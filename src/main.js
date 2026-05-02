@@ -7,6 +7,8 @@ import ShopScene from './scenes/ShopScene.js';
 import GameOverScene from './scenes/GameOverScene.js';
 import UIScene from './scenes/UIScene.js';
 
+Phaser.GameObjects.Text.DEFAULT_RESOLUTION = window.devicePixelRatio;
+
 const config = {
   type: Phaser.AUTO,
   parent: 'game-container',
