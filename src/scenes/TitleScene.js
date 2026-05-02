@@ -1,3 +1,4 @@
+import Phaser from 'phaser';
 import { SCENES } from '../constants.js';
 import GameState from '../state/GameState.js';
 

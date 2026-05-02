@@ -1,3 +1,4 @@
+import Phaser from 'phaser';
 import { SCENES } from '../constants.js';
 
 export default class GameOverScene extends Phaser.Scene {

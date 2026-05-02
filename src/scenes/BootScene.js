@@ -1,3 +1,4 @@
+import Phaser from 'phaser';
 import { SCENES, CACHE_KEYS, ASSET_KEYS } from '../constants.js';
 
 import enemiesUrl from '../data/enemies.json?url';

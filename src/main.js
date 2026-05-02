@@ -1,7 +1,4 @@
 import Phaser from 'phaser';
-
-window.Phaser = Phaser;
-
 import BootScene from './scenes/BootScene.js';
 import TitleScene from './scenes/TitleScene.js';
 import MapScene from './scenes/MapScene.js';

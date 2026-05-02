@@ -1,3 +1,4 @@
+import Phaser from 'phaser';
 import { SCENES, MAX_MAP_LEVEL } from '../constants.js';
 import GameState from '../state/GameState.js';
 
