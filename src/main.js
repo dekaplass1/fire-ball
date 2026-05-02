@@ -7,7 +7,10 @@ import ShopScene from './scenes/ShopScene.js';
 import GameOverScene from './scenes/GameOverScene.js';
 import UIScene from './scenes/UIScene.js';
 
-Phaser.GameObjects.Text.DEFAULT_RESOLUTION = window.devicePixelRatio;
+const _origAddText = Phaser.GameObjects.GameObjectFactory.prototype.text;
+Phaser.GameObjects.GameObjectFactory.prototype.text = function (x, y, text, style) {
+  return _origAddText.call(this, x, y, text, style).setResolution(window.devicePixelRatio || 1);
+};
 
 const config = {
   type: Phaser.AUTO,
@@ -18,8 +21,6 @@ const config = {
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
-    zoom: window.devicePixelRatio,
-    autoRound: true,
   },
   render: {
     roundPixels: true,
