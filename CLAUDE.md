@@ -19,9 +19,19 @@ JRPG solo tour par tour, navigateur mobile (sans installation), cercle d'amis. S
 - **CombatEngine** : module JS pur (`src/systems/CombatEngine.js`) — **zéro import Phaser**, jamais de logique de jeu dans les scènes.
 - **JSON de données** : dans `src/data/`, chargés par Phaser via `import url from '...?url'` (Vite résout l'URL en dev et prod). Clés de cache dans `CACHE_KEYS`, clés d'assets dans `ASSET_KEYS` — tout dans `constants.js`.
 - **UIScene** : lancée en `parallel` par `BootScene.create()` via `this.scene.launch(SCENES.UI)` **avant** `this.scene.start(SCENES.TITLE)`. Ne jamais la relancer depuis une autre scène.
-- **Communication inter-scènes** : uniquement via événements Phaser (`namespace:event-name`) ou lecture directe de `GameState` — **jamais d'import scène→scène**.
+- **Communication inter-scènes** : `this.game.events` comme bus global — `this.game.events.emit('hero:hp-changed', { hp, maxHp })` depuis les scènes, `this.game.events.on(...)` dans UIScene. **PAS** l'approche per-scène (`this.scene.get(key).events`) — timing issues.
 - **`currentMapLevel`** : vit dans `GameState.hero` (pas à la racine) pour être inclus automatiquement dans `save()`/`load()`. Incrémenté par CombatScene après victoire, pas par MapScene.
+- **Import Phaser dans chaque scène** : chaque fichier de scène fait `import Phaser from 'phaser'`. `window.Phaser = Phaser` dans `main.js` ne fonctionne PAS — les imports ES modules sont hoistés, les classes de scènes s'évaluent avant le corps de `main.js`. Le `manualChunks: { phaser: ['phaser'] }` garantit un seul chunk partagé.
 - **Versions installées** : Phaser 4.1.0, Vite 6.4.2.
+
+## Déploiement Vercel
+
+- **URL prod** : `fire-ball.vercel.app`
+- **Repo GitHub** : `github.com/dekaplass1/fire-ball` (public)
+- **Git author** : `elliotnathanwilson` / `elliot.nathan.wilson@gmail.com` — doit correspondre au compte Vercel pour que CI/CD fonctionne
+- **vercel.json** : `{ "buildCommand": "npm run build", "outputDirectory": "dist", "framework": null }`
+- **Vercel Authentication** : désactivée (Settings → Security)
+- Les 404 sprites dans la console sont **normaux** jusqu'à Story 2.3 (assets pas encore créés)
 
 ## Périmètre MVP
 
@@ -44,8 +54,8 @@ JRPG solo tour par tour, navigateur mobile (sans installation), cercle d'amis. S
 1. Joueur choisit action (bouton)
 2. `CombatEngine.resolveTurn(action)` → synchrone → `{heroHp, enemyHp, log, outcome}`
 3. GameState mis à jour
-4. `emit('combat:turn-end', payload)` → CombatScene anime
-5. Si `outcome !== null` : `emit('combat:end', { outcome })` → transition de scène
+4. `this.game.events.emit('combat:turn-end', payload)` → CombatScene anime
+5. Si `outcome !== null` : `this.game.events.emit('combat:end', { outcome })` → transition de scène
 
 ## Décisions de conception MVP
 
@@ -58,14 +68,14 @@ JRPG solo tour par tour, navigateur mobile (sans installation), cercle d'amis. S
 
 ## État d'implémentation
 
-**Stories 1.1–1.6 : review** | **Story 1.7 : ready-for-dev** | **Prochaine : Epic 2 (Combat)**
+**Epic 1 complet — Stories 1.1–1.7 : review** | **Prochaine : Story 2.1 (CombatEngine)**
 
 | Epic | Stories | Statut |
 |---|---|---|
-| 1 — Lancement & map | 1.1 → 1.5 implémentées, 1.6–1.7 à faire | 🔄 |
+| 1 — Lancement & map | 1.1–1.7 implémentées | ✅ review |
 | 2 — Combat | 2.1–2.4 à faire | ⏳ |
 | 3 — Progression | 3.1–3.3 à faire | ⏳ |
 | 4 — Boutique | 4.1–4.2 à faire | ⏳ |
 | 5 — Persistance | 5.1–5.3 à faire | ⏳ |
 
-**Story 1.6 — UIScene :** HUD en `parallel`, affiche HP/maxHp, level, Gils. Lit `GameState.hero` au démarrage puis écoute `hero:hp-changed`, `hero:level-up`, `hero:gils-changed` émis par les autres scènes. Position non intrusive (ne masque pas les boutons).
+**Story 2.1 — CombatEngine :** Module JS pur (`src/systems/CombatEngine.js`), zéro import Phaser. Méthodes : `initCombat(mapLevel)` (sélection aléatoire ennemi), `resolveTurn(action)` → `{heroHp, enemyHp, log, outcome}`. Outcome : `null` / `'victory'` / `'defeat'` / `'fled'`.
